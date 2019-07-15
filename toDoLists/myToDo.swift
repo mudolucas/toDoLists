@@ -9,20 +9,26 @@
 import Foundation
 
 class ToDoItem: NSObject, NSCoding{
+    
     var title:String
     var done:Bool
+    var reward:Int
     
-    public init(title: String) {
+    public init(title: String, reward:String) {
         self.title = title
         self.done = false
+        let rwd = Int(reward) ?? 0
+        self.reward = rwd
     }
     
     required init?(coder aDecoder: NSCoder)
     {
         // Try to unserialize the "title" variable
-        if let title = aDecoder.decodeObject(forKey: "title") as? String
+        if let title = aDecoder.decodeObject(forKey: "title") as? String, let reward = aDecoder.decodeObject(forKey: "reward") as? String
         {
             self.title = title
+            let rwd = Int(reward) ?? 0
+            self.reward = rwd
         }
         else
         {
@@ -51,7 +57,7 @@ class ToDoItem: NSObject, NSCoding{
     }
 }
 
-extension ToDoItem
+/*extension ToDoItem
 {
     public class func getMockData() -> [ToDoItem]
     {
@@ -62,7 +68,10 @@ extension ToDoItem
             ToDoItem(title: "Dog food")
         ]
     }
-}
+}*/
+
+
+
 // Creates an extension of the Collection type (aka an Array),
 // but only if it is an array of ToDoItem objects.
 extension Collection where Iterator.Element == ToDoItem
