@@ -17,47 +17,12 @@ class HeadlineTableViewCell: UITableViewCell {
 class ViewController: UITableViewController {
     
     //private var todoItems = ToDoItem.getMockData()
-    private var todoItems = [ToDoItem]()
+    private var todoItems = [Quests]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Tommi Quests"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ViewController.didTapAddItemButton(_:)))
-        // Setup a notification to let us know when the app is about to close,
-        // and that we should store the user items to persistence. This will call the
-        // applicationDidEnterBackground() function in this class
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(UIApplicationDelegate.applicationDidEnterBackground(_:)),
-            name:
-            NSNotification.Name.NSExtensionHostDidEnterBackground,
-            object: nil)
-        
-        do
-        {
-            // Try to load from persistence
-            self.todoItems = try [ToDoItem].readFromPersistence()
-        }
-        catch let error as NSError
-        {
-            if error.domain == NSCocoaErrorDomain && error.code == NSFileReadNoSuchFileError
-            {
-                NSLog("No persistence file found, not necesserially an error...")
-            }
-            else
-            {
-                let alert = UIAlertController(
-                    title: "Error",
-                    message: "Could not load the to-do items!",
-                    preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                
-                self.present(alert, animated: true, completion: nil)
-                
-                NSLog("Error loading from persistence: \(error)")
-            }
-        }
         
     }
     
@@ -81,7 +46,7 @@ class ViewController: UITableViewController {
             cell.titleTextLabel?.text = item.title
             let rwd = String(item.reward)
             cell.rewardTextLabel?.text = rwd
-            cell.iconImageView?.image = UIImage(named: "money_icon")
+            cell.iconImageView?.image = UIImage(named: "green_circle")
             
             let accessory: UITableViewCell.AccessoryType = item.done ? .checkmark : .none
             cell.accessoryType = accessory
@@ -148,7 +113,7 @@ class ViewController: UITableViewController {
         let newIndex = todoItems.count
         
         // Create new item and add it to the todo items list
-        todoItems.append(ToDoItem(title: title,reward: reward))
+        todoItems.append(Quests(title: title,reward: reward))
         
         // Tell the table view a new row has been created
         tableView.insertRows(at: [IndexPath(row: newIndex, section: 0)], with: .top)
@@ -162,20 +127,6 @@ class ViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .top)
         }
     }
-    
-    /*
-    @objc
-    public func applicationDidEnterBackground(_ notification: NSNotification)
-    {
-        do
-        {
-            try todoItems.writeToPersistence()
-        }
-        catch let error
-        {
-            NSLog("Error writing to persistence: \(error)")
-        }
-    }*/
     
 }
 
