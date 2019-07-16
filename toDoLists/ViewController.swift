@@ -79,11 +79,9 @@ class ViewController: UITableViewController {
         // Add 1 textField and customize it
         alert.addTextField { (textField: UITextField) in
             textField.keyboardType = .numberPad
-            textField.autocorrectionType = .default
             textField.placeholder = "Reward"
             textField.clearButtonMode = .whileEditing
-        }
-        
+        } 
         // Add a "cancel" button to the alert. This one doesn't need a handler
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
