@@ -27,21 +27,18 @@ class ViewController: UITableViewController {
     }
     
     
-    override func numberOfSections(in tableView: UITableView) -> Int
-    {
+    override func numberOfSections(in tableView: UITableView) -> Int{
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return todoItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_todo", for: indexPath) as! HeadlineTableViewCell
         
-        if indexPath.row < todoItems.count
-        {
+        if indexPath.row < todoItems.count{
             let item = todoItems[indexPath.row]
             cell.titleTextLabel?.text = item.title
             let rwd = String(item.reward)
@@ -51,7 +48,6 @@ class ViewController: UITableViewController {
             let accessory: UITableViewCell.AccessoryType = item.done ? .checkmark : .none
             cell.accessoryType = accessory
         }
-        
         return cell
     }
     
@@ -60,16 +56,13 @@ class ViewController: UITableViewController {
         
         if indexPath.row < todoItems.count{
             let item = todoItems[indexPath.row]
-            
             item.done = !item.done
-            
             tableView.reloadRows(at: [indexPath], with: .automatic)
             
         }
     }
     
-    @objc func didTapAddItemButton(_ sender: UIBarButtonItem)
-    {
+    @objc func didTapAddItemButton(_ sender: UIBarButtonItem){
         // Create an alert
         let alert = UIAlertController(
             title: "New quest",
@@ -90,7 +83,6 @@ class ViewController: UITableViewController {
             textField.placeholder = "Reward"
             textField.clearButtonMode = .whileEditing
         }
-        //alert.addTextField(configurationHandler: nil)
         
         // Add a "cancel" button to the alert. This one doesn't need a handler
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -107,8 +99,7 @@ class ViewController: UITableViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    private func addNewToDoItem(title: String,reward:String)
-    {
+    private func addNewToDoItem(title: String,reward:String){
         // The index of the new item will be the current item count
         let newIndex = todoItems.count
         
