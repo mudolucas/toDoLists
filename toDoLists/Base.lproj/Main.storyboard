@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="p2F-yW-AdY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a7R-qT-B7C">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -77,12 +77,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ctE-ue-JYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1115.9420289855072" y="-654.24107142857144"/>
+            <point key="canvasLocation" x="2125" y="-654"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="evi-1t-p26">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aO7-Xd-OrI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="p2F-yW-AdY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" selectedImage="Quests_Map2" systemItem="topRated" id="IAG-5w-jJv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JLy-JL-iic">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -93,9 +95,28 @@
                         <segue destination="PiY-BM-qFR" kind="relationship" relationship="rootViewController" id="IKm-a8-Cf5"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aO7-Xd-OrI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079.7101449275362" y="-653.57142857142856"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="F8W-9t-Qoh">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="a7R-qT-B7C" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2hA-8C-Gjm">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="p2F-yW-AdY" kind="relationship" relationship="viewControllers" id="oR1-CE-UBo"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U9o-4C-aq0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="169.56521739130437" y="-653.57142857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Quests_Map2" width="20.5" height="20.5"/>
+    </resources>
 </document>
