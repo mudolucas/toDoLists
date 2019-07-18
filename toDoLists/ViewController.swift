@@ -17,7 +17,13 @@ class HeadlineTableViewCell: UITableViewCell {
 class ViewController: UITableViewController {
     
     //private var todoItems = ToDoItem.getMockData()
-    private var todoItems = [Quests]()
+    private var activeQuests = [Quests]()
+    private var completedQuests = [Quests]()
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
+    @IBAction func segmentedChanged(_ sender: Any) {
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,33 +38,63 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return todoItems.count
+        switch (segmentControl.selectedSegmentIndex) {
+        case 0:
+            return activeQuests.count
+        case 1:
+            return completedQuests.count
+        default:
+            break
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell_todo", for: indexPath) as! HeadlineTableViewCell
         
-        if indexPath.row < todoItems.count{
-            let item = todoItems[indexPath.row]
-            cell.titleTextLabel?.text = item.title
-            let rwd = String(item.reward)
-            cell.rewardTextLabel?.text = rwd
-            cell.iconImageView?.image = UIImage(named: "green_circle")
-            
-            let accessory: UITableViewCell.AccessoryType = item.done ? .checkmark : .none
-            cell.accessoryType = accessory
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            if indexPath.row < activeQuests.count{
+                let item = activeQuests[indexPath.row]
+                cell.titleTextLabel?.text = item.title
+                let rwd = String(item.reward)
+                cell.rewardTextLabel?.text = rwd
+                cell.iconImageView?.image = UIImage(named: "green_circle")
+                
+                let accessory: UITableViewCell.AccessoryType = item.done ? .checkmark : .none
+                cell.accessoryType = accessory
+            }
+            return cell
+        case 1:
+            if indexPath.row < completedQuests.count{
+                let item = completedQuests[indexPath.row]
+                cell.titleTextLabel?.text = item.title
+                let rwd = String(item.reward)
+                cell.rewardTextLabel?.text = rwd
+                cell.iconImageView?.image = UIImage(named: "green_circle")
+                
+                let accessory: UITableViewCell.AccessoryType = item.done ? .checkmark : .checkmark
+                cell.accessoryType = accessory
+            }
+            return cell
+        default:
+            break
         }
         return cell
+        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row < todoItems.count{
-            let item = todoItems[indexPath.row]
-            item.done = !item.done
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-            
+        if segmentControl.selectedSegmentIndex == 0{
+            if indexPath.row < activeQuests.count{
+                let item = activeQuests[indexPath.row]
+                item.done = !item.done
+                //tableView.reloadRows(at: [indexPath], with: .automatic)
+                switchQuestStatus(index: indexPath.row)
+                tableView.reloadData()
+            }
         }
     }
     
@@ -99,10 +135,10 @@ class ViewController: UITableViewController {
     
     private func addNewToDoItem(title: String,reward:String){
         // The index of the new item will be the current item count
-        let newIndex = todoItems.count
+        let newIndex = activeQuests.count
         
         // Create new item and add it to the todo items list
-        todoItems.append(Quests(title: title,reward: reward))
+        activeQuests.append(Quests(title: title,reward: reward))
         
         // Tell the table view a new row has been created
         tableView.insertRows(at: [IndexPath(row: newIndex, section: 0)], with: .top)
@@ -110,11 +146,18 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
-        if indexPath.row < todoItems.count
+        if indexPath.row < activeQuests.count
         {
-            todoItems.remove(at: indexPath.row)
+            activeQuests.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .top)
         }
+    }
+    
+    //HELPERS
+    func switchQuestStatus(index:Int){
+        var swapQuest:Quests = activeQuests[index]
+        completedQuests.append(swapQuest)
+        activeQuests.remove(at: index)
     }
     
 }

@@ -57,11 +57,27 @@
                             <outlet property="delegate" destination="PiY-BM-qFR" id="kQg-vz-Q4U"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="2Nd-Mt-Rdw"/>
+                    <navigationItem key="navigationItem" id="2Nd-Mt-Rdw">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="DZO-0c-J3Z">
+                            <rect key="frame" x="92" y="7.5" width="230" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Active"/>
+                                <segment title="Completed"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentedChanged:" destination="PiY-BM-qFR" eventType="valueChanged" id="IlP-QO-xqh"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segmentControl" destination="DZO-0c-J3Z" id="MRq-hl-HF3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ctE-ue-JYB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1116" y="-654"/>
+            <point key="canvasLocation" x="1115.9420289855072" y="-654.24107142857144"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="evi-1t-p26">
