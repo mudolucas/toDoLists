@@ -14,12 +14,6 @@ class Quests{
     var done:Bool
     var reward:Int
     
-    struct PropertyKey {
-        static let title = "title"
-        static let done = "done"
-        static let reward = "reward"
-    }
-    
     public init(title: String, reward:String) {
         self.title = title
         self.done = false
@@ -29,3 +23,10 @@ class Quests{
     
     
 }
+/*extension Quests
+{
+    public class func getMockData() -> Array<Quests>
+    {
+        return [[Quests(title: "Quest1", reward: "10")],[Quests(title: "Quest2", reward: "20")]]
+    }
+}*/
