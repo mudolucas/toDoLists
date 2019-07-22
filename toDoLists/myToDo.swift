@@ -8,17 +8,27 @@
 
 import Foundation
 
+private enum Frequency{
+    case everyday
+    case one_time_only
+    case weekly
+}
+
+private enum Status{
+    case active
+    case completed
+    case expired
+}
 class Quests{
-    
+    // MAKE IT PRIVATE AND SET GETTERS AND SETTERS
+    //private var status:Status
+    //private var frequency:Frequency
     var title:String
     var done:Bool
     var reward:Int
-    
-    struct PropertyKey {
-        static let title = "title"
-        static let done = "done"
-        static let reward = "reward"
-    }
+    // Data Created
+    //Data Completed
+    // ACITVE DATE RANGE
     
     public init(title: String, reward:String) {
         self.title = title
@@ -26,6 +36,5 @@ class Quests{
         let rwd = Int(reward) ?? 0
         self.reward = rwd
     }
-    
     
 }

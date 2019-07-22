@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeadlineTableViewCell: UITableViewCell {
+class QuestsTableViewCells: UITableViewCell {
     @IBOutlet weak var titleTextLabel: UILabel!
     @IBOutlet weak var rewardTextLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
@@ -32,6 +32,7 @@ class ViewController: UITableViewController {
     }
     
     
+    
     override func numberOfSections(in tableView: UITableView) -> Int{
         return 1
     }
@@ -49,7 +50,7 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_todo", for: indexPath) as! HeadlineTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell_todo", for: indexPath) as! QuestsTableViewCells
         
         switch segmentControl.selectedSegmentIndex {
         case 0:
@@ -145,11 +146,20 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
-        if indexPath.row < activeQuests.count
-        {
-            activeQuests.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .top)
+        if segmentControl.selectedSegmentIndex == 0{
+            if indexPath.row < activeQuests.count
+            {
+                activeQuests.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .top)
+            }
+        }else{
+            if indexPath.row < completedQuests.count
+            {
+                completedQuests.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .top)
+            }
         }
+        
     }
     
     //HELPERS
